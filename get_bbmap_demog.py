@@ -27,14 +27,18 @@ def main():
     res2 = test2.demographics
     test3 = BroadbandmapAPI(state="Cali")
     res3 = test3.demographics
+    test4 = BroadbandmapAPI(state="Texas")
+    res4 = test4.demographics
 
     tests.append(res1)
     tests.append(res2)
     tests.append(res3)
+    tests.append(res4)
 
 
     test_report = Report_demography(tests)
     test_report.create_csv(file="foo.csv")
+    print(test_report.get_poverty_means())
 
 if __name__ == '__main__':
     main()
