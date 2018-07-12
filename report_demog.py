@@ -22,11 +22,11 @@ class Report_demography:
         Initialize with dataset in form of a list of JSON per state
 
         Args:
-            demography: A list containing JSON output of a state's 
-                        demography 
+            demography: A list containing JSON output of a state's
+                        demography
         """
-        
-        # Sort by state name so we don't have to mess with this with csv 
+
+        # Sort by state name so we don't have to mess with this with csv
         # creation, if required.
         self.demography = sorted(demography, key=lambda s: s[0]['geographyName'])
 
@@ -37,7 +37,7 @@ class Report_demography:
         """
 
         mean = 0.0
-        total_pov = 0.0 # Number of people living in poverty 
+        total_pov = 0.0 # total number of people living in poverty
         total_pop = 0.0
 
         for data in self.demography:
@@ -59,8 +59,8 @@ class Report_demography:
                   goes to stdout.
 
         """
+
         self.csvfile = file
-        
         header = ['state', 'population', 'households', 'income below poverty',
                   'median income']
 
@@ -74,7 +74,6 @@ class Report_demography:
                 households = data[0]['households']
                 incomeBelowPoverty = data[0]['incomeBelowPoverty']
                 medianIncome = data[0]['medianIncome']
-                
                 csv_entry = [state, population, households, incomeBelowPoverty,
                              medianIncome]
                 writer.writerow(csv_entry)

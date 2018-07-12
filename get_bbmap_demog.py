@@ -16,29 +16,49 @@
 
 from broadbandmap_api import BroadbandmapAPI
 from report_demog import Report_demography
-
+import argparse
 import sys
 
 def main():
-    tests = []
-    test1 = BroadbandmapAPI(state="Oregon")
-    res1 = test1.demographics
-    test2 = BroadbandmapAPI(state="New York")
-    res2 = test2.demographics
-    test3 = BroadbandmapAPI(state="Cali")
-    res3 = test3.demographics
-    test4 = BroadbandmapAPI(state="Texas")
-    res4 = test4.demographics
+    dataset = []
 
-    tests.append(res1)
-    tests.append(res2)
-    tests.append(res3)
-    tests.append(res4)
+    # Handle commandline arguments and options to the application
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--states", type=str, nargs="+", dest="states", 
+                        required=True, help="Comma separated value list of "
+                        "states. e.g., \"California,Oregon,New York\"")
+    parser.add_argument("-a", "--averages", help="Return mean poverty rate of input states.", action="store_true")
+    parser.add_argument("-c", "--CSV", help="Output to CSV file", action="store_true")
+    args = parser.parse_args()
 
+    if not args.averages and not args.CSV:
+        print("You need to choose to output a mean, CSV, or both!")
+        parser.print_help()
+        sys.exit()
 
-    test_report = Report_demography(tests)
-    test_report.create_csv(file="foo.csv")
-    print(test_report.get_poverty_means())
+    arg_str = ' '.join(args.states)
+    states = arg_str.split(',')
+    states = [state.lstrip() for state in states] # Clean up input
+
+    # Get demographic data 
+    for state in states:
+        api_call = BroadbandmapAPI(state=state)
+
+        # Check for improper state
+        if api_call.state_code != 0:
+            dataset.append(api_call.demographics)
+
+    # Generate output data from our dataset
+    report = Report_demography(dataset)
+    print("\n")
+    if args.averages:
+        mean = report.get_poverty_means()
+        print("Mean poverty rate in input states is: %s" % mean)
+    if args.CSV:
+        report.create_csv(file="demographics.csv")
+        print("A report with requested state demographics has been created: demography.csv")
+
+    print("\n")
 
 if __name__ == '__main__':
     main()
