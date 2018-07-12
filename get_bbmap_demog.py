@@ -15,12 +15,26 @@
 """
 
 from broadbandmap_api import BroadbandmapAPI
+from report_demog import Report_demography
+
+import sys
 
 def main():
+    tests = []
+    test1 = BroadbandmapAPI(state="Oregon")
+    res1 = test1.demographics
+    test2 = BroadbandmapAPI(state="New York")
+    res2 = test2.demographics
+    test3 = BroadbandmapAPI(state="Cali")
+    res3 = test3.demographics
 
-    BroadbandmapAPI(state="New York")
-    print("Hello world")
+    tests.append(res1)
+    tests.append(res2)
+    tests.append(res3)
 
+
+    test_report = Report_demography(tests)
+    test_report.create_csv(file="foo.csv")
 
 if __name__ == '__main__':
     main()
