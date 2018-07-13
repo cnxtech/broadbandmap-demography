@@ -29,7 +29,7 @@ def main():
     parser.add_argument("-c", "--CSV", help="Output to CSV file", action="store_true")
     args = parser.parse_args()
 
-    if not args.averages and not args.CSV:
+    if not args.average and not args.CSV:
         print("You need to choose to output a mean, CSV, or both!")
         parser.print_help()
         sys.exit()
@@ -49,7 +49,7 @@ def main():
     # Generate output data from our dataset
     report = Report_demography(dataset)
     print("\n")
-    if args.averages:
+    if args.average:
         mean = report.get_poverty_means()
         print("Mean poverty rate in input states is: %s" % mean)
     if args.CSV:
