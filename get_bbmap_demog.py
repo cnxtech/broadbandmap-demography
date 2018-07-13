@@ -4,14 +4,11 @@
     available at http://www.broadbandmap.gov and scrapes basic demographic data
     for a user-defined, comma value separated list of states. 
 
-    This method handles command line options, basic I/O, and initial, basicl 
-    input error checking.
+    This method handles command line options, basic I/O, and basic input error 
+    checking.
 
     Detailed information on usage, required packages, and other pertinent info
     available on README.md attached to Git repository that contains this code.
-
-
-
 """
 
 from broadbandmap_api import BroadbandmapAPI
@@ -27,7 +24,8 @@ def main():
     parser.add_argument("-s", "--states", type=str, nargs="+", dest="states", 
                         required=True, help="Comma separated value list of "
                         "states. e.g., \"California,Oregon,New York\"")
-    parser.add_argument("-a", "--averages", help="Return mean poverty rate of input states.", action="store_true")
+    parser.add_argument("-a", "--average", help="Return mean poverty rate of input states.", 
+                        action="store_true")
     parser.add_argument("-c", "--CSV", help="Output to CSV file", action="store_true")
     args = parser.parse_args()
 
@@ -40,7 +38,7 @@ def main():
     states = arg_str.split(',')
     states = [state.lstrip() for state in states] # Clean up input
 
-    # Get demographic data 
+    # Get demographic data
     for state in states:
         api_call = BroadbandmapAPI(state=state)
 

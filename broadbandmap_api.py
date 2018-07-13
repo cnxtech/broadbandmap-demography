@@ -1,10 +1,8 @@
 """
     BroadbandmapAPI class scrapes data from http://www.broadbandmap.gov, does some
-    basic error checking, and returns JSON output from requests. 
-
+    basic error checking, and returns JSON output from requests.
 
 """
-
 
 import requests
 import warnings
@@ -27,7 +25,7 @@ class BroadbandmapAPI:
             If the input state is valid, get an statecode from
             url_base_get_st_code via API call, then use that to get demographic
             data from url_base_get_demo.
-           
+         
             Args:
                 state: This should be the name of the state or state or
                        territory to get demographic info on. Must be at least
@@ -40,12 +38,11 @@ class BroadbandmapAPI:
         self.state_code = 0
         self.demographics = ""
         response_state = requests.get("%s%s?format=json" % \
-                                      (BroadbandmapAPI.url_base_get_st_code, self.state)).json()
-        
+                                      (BroadbandmapAPI.url_base_get_st_code, self.state)).json()      
         if not response_state['message']:
             self.state_code = response_state['Results']['state'][0]['fips']
-            response_demo = requests.get("%s%s?format=json" % (BroadbandmapAPI.url_base_get_demo,
-                                                                 self.state_code)).json()
+            response_demo = requests.get("%s%s?format=json" %
+                                         (BroadbandmapAPI.url_base_get_demo, self.state_code)).json()
             self.demographics = response_demo['Results']
 
         if self.state_code == 0:

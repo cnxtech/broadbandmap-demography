@@ -34,6 +34,9 @@ class Report_demography:
         """
             Get weighted means of 'income below means' demography data
 
+            Returns:
+                weighted_mean: Weighted mean of poverty rate of all states
+
         """
 
         mean = 0.0
@@ -48,7 +51,9 @@ class Report_demography:
             total_pov += popBelowPoverty
             total_pop += population
 
-        return(round((total_pov / total_pop), 4))
+        weighted_mean = round((total_pov / total_pop), 4)
+        
+        return(weighted_mean)
 
     def create_csv(self, file):
         """
