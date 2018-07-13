@@ -40,6 +40,8 @@ The API only requires the first three letters of the state to work, so 'Cali' wi
 
 The following python libraries are required.
 
+### Python Libraries
+
 ```
 argparse
 csv
@@ -49,7 +51,6 @@ pytest
 requests
 sys
 warnings
-
 ```
 
 These should be included with most modern Python 3.6.x implementations. Please note, this has only been tested thoroughly with Python 3.6.5, although Python 3.x should work without issue. I cannot make any claims against Python 2.x!
@@ -59,6 +60,15 @@ A `requirements.txt` file has been included to resolve these dependencies which 
 ```
 $ pip install -r requirements.txt
 ```
+
+###
+
+Tested on the following
+
+- macOS High Sierra (10.13.5)
+- Ubuntu Xenial Xerus (16.04)
+
+Earlier versions of supported OSes will probably work ok. A relatively modern macOS or Linux distro with recent Python 3 has a good chance of working. 
 
 ## Unit Testing
 
