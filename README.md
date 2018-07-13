@@ -8,7 +8,7 @@ optional arguments:
   -s STATES [STATES ...], --states STATES [STATES ...]
                         Comma separated value list of states. e.g.,
                         "California,Oregon,New York"
-  -a, --averages        Return mean poverty rate of input states.
+  -a, --average         Return mean poverty rate of input states.
   -c, --CSV             Output to CSV file
 ```
 ## Basics
@@ -21,7 +21,7 @@ A simple command line Python utility to scrape data from National Broadband Map 
 Examples are often the most illuminating:
 
 ```
-$ python get_bbmap_demog.py -s California, New York, Oregon --CSV --averages
+$ python get_bbmap_demog.py -s California, New York, Oregon --CSV --average
 ```
 
 Will collect demographic information on California, New York, and Oregon. This information will be outputted
