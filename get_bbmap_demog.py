@@ -56,7 +56,7 @@ def main():
         print("Mean poverty rate in input states is: %s" % mean)
     if args.CSV:
         report.create_csv(file="demographics.csv")
-        print("A report with requested state demographics has been created: demography.csv")
+        print("A report with requested state demographics has been created: demographics.csv")
 
     print("\n")
 

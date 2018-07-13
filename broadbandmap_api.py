@@ -29,9 +29,9 @@ class BroadbandmapAPI:
             data from url_base_get_demo.
            
             Args:
-                param2: This should be the name of the state or state or
-                        territory to get demographic info on. Must be at least
-                        three letters according to broadbandmap.gov API.
+                state: This should be the name of the state or state or
+                       territory to get demographic info on. Must be at least
+                       three letters according to broadbandmap.gov API.
 
         """
         self.state = state
@@ -50,17 +50,3 @@ class BroadbandmapAPI:
 
         if self.state_code == 0:
             warnings.warn("%s is not a valid state/territory." % state)
-
-    def test(self):
-        """
-        Just return base case of Oregon demographic info to make sure API call is working
-
-        """
-        state = "Oregon"
-        response = requests.get("%s%s?format=json" % (BroadbandmapAPI.url_base_get_st_code, state))
-        api_status = response.status_code
-        #print(response.json())
-        #print("Status code: ", api_status)
-
-        response = requests.get("%s41?format=json" % (BroadbandmapAPI.url_base_get_demo))
-        print(response.json())
